@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.animalsRoutes = void 0;
+var express_1 = require("express");
+var multer_1 = __importDefault(require("multer"));
+var upload_1 = __importDefault(require("../config/upload"));
+var CreateAnimalController_1 = require("../modules/animals/controllers/CreateAnimalController");
+var GetAnimalByIDController_1 = require("../modules/animals/controllers/GetAnimalByIDController");
+var ListAnimalsController_1 = require("../modules/animals/controllers/ListAnimalsController");
+var UpdateAnimalController_1 = require("../modules/animals/controllers/UpdateAnimalController");
+var UploadAnimalAvatarController_1 = require("../modules/animals/controllers/UploadAnimalAvatarController");
+var animalsRoutes = express_1.Router();
+exports.animalsRoutes = animalsRoutes;
+var uploadAvatar = multer_1.default(upload_1.default.upload("./public/images/animal"));
+animalsRoutes.post("/:id", new CreateAnimalController_1.CreateAnimalController().handle);
+animalsRoutes.put("/:id", new UpdateAnimalController_1.UpdateAnimalController().handle);
+animalsRoutes.get("/id/:id", new GetAnimalByIDController_1.GetAnimalByIDController().handle);
+animalsRoutes.get("/", new ListAnimalsController_1.ListAnimalsController().handle);
+animalsRoutes.patch("/avatar/:animal_id", uploadAvatar.single("avatar"), new UploadAnimalAvatarController_1.UploadAnimalAvatarController().handle);

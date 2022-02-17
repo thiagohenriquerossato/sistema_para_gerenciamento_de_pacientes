@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router = void 0;
+var express_1 = require("express");
+var animals_routes_1 = require("./animals.routes");
+var appointment_routes_1 = require("./appointment.routes");
+var session_routes_1 = require("./session.routes");
+var tutores_routes_1 = require("./tutores.routes");
+var vaccines_routes_1 = require("./vaccines.routes");
+var router = express_1.Router();
+exports.router = router;
+router.use("/tutor", tutores_routes_1.tutoresRoutes);
+router.use("/animal", animals_routes_1.animalsRoutes);
+router.use("/vaccine", vaccines_routes_1.vaccineRoutes);
+router.use("/appointment", appointment_routes_1.appointmentRoutes);
+router.use(session_routes_1.sessionRoutes);

@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.vaccineRoutes = void 0;
+var express_1 = require("express");
+var CreateVaccineController_1 = require("../modules/vaccines/controllers/CreateVaccineController");
+var ListVaccineByAnimalIDController_1 = require("../modules/vaccines/controllers/ListVaccineByAnimalIDController");
+var ListVaccinesController_1 = require("../modules/vaccines/controllers/ListVaccinesController");
+var vaccineRoutes = express_1.Router();
+exports.vaccineRoutes = vaccineRoutes;
+vaccineRoutes.post("/:animal_id", new CreateVaccineController_1.CreateVaccineController().handle);
+vaccineRoutes.get("/list", new ListVaccinesController_1.ListVaccinesController().handle);
+vaccineRoutes.get("/list/:animal_id", new ListVaccineByAnimalIDController_1.ListVaccineByAnimalIDController().handle);

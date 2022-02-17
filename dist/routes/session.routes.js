@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.sessionRoutes = void 0;
+var express_1 = require("express");
+var RefreshTokenController_1 = require("../modules/users/controllers/RefreshTokenController");
+var SessionController_1 = require("../modules/users/controllers/SessionController");
+var sessionRoutes = express_1.Router();
+exports.sessionRoutes = sessionRoutes;
+sessionRoutes.post("/session", new SessionController_1.SessionController().handle);
+sessionRoutes.post("/refresh-token", new RefreshTokenController_1.RefreshTokenController().handle);
