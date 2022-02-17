@@ -5,10 +5,7 @@ const prisma = new PrismaClient();
 
 async function main() {
     const password = await hash("admin", 8);
-    await prisma.user.updateMany({
-        where: {
-            name: "admin",
-        },
+    await prisma.user.create({
         data: {
             name: "admin",
             email: "thiago.rossato.tr@gmail.com",

@@ -47,10 +47,7 @@ function main() {
                 case 0: return [4 /*yield*/, bcrypt_1.hash("admin", 8)];
                 case 1:
                     password = _a.sent();
-                    return [4 /*yield*/, prisma.user.updateMany({
-                            where: {
-                                name: "admin",
-                            },
+                    return [4 /*yield*/, prisma.user.create({
                             data: {
                                 name: "admin",
                                 email: "thiago.rossato.tr@gmail.com",
