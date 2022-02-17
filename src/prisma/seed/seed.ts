@@ -23,5 +23,6 @@ main()
         process.exit(1);
     })
     .finally(async () => {
+        console.log("Dados criados");
         await prisma.$disconnect();
     });
