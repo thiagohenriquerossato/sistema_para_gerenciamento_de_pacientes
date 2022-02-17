@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+    database_syspet:
+        image: postgres
+        container_name: syspet_database
+        restart: always
+        ports: 
+            - 5432:5432
+        environment: 
+            - POSTGRES_USER=syspet
+            - POSTGRES_PASSWORD=syspet
+            - POSTGRES_DB=syspetdb
+        volumes:
+            - database-data:/var/lib/postgresql/data/
+
+volumes:
+    database-data:
+        driver: local

@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tutor {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  phone      String
+  address    String
+  avatar     String?
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  animals Animal[]
+  @@map("tutores")
+}
+
+model Animal {
+  id                    String   @id @default(uuid())
+  tutor                 Tutor    @relation(fields: [tutor_id], references: [id])
+  species               String
+  name                  String
+  weight                Int
+  breed                 String
+  gender                Gender   @default(MACHO)
+  avatar                String?  @unique
+  pre_existing_diseases String[]
+  created_at            DateTime @default(now())
+  updated_at            DateTime @default(now())
+  vaccines              Vaccine[]
+  birth                 DateTime
+  appointments          Appointment[]
+
+  tutor_id String
+
+  @@map("animals")
+}
+
+enum Gender {
+  MACHO
+  FEMEA
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        String      @id @default(uuid())
+  role      Role        @default(ADMIN)
+  name      String
+  email     String      @unique
+  password  String
+  userTokem userToken[]
+}
+
+model userToken {
+  id            String @id @default(uuid())
+  refresh_token String
+  expires_in    DateTime
+  user          User   @relation(fields: [user_id], references: [id])
+  user_id       String
+  created_at    DateTime @default(now())
+}
+
+model Vaccine{
+    id              String @id @default(uuid())
+    animal          Animal @relation(fields: [animal_id], references:[id])
+    medicine        String
+    next_dose       DateTime
+    observations    String? 
+    created_at      DateTime @default(now())
+    animal_id       String
+
+    @@map("vaccines")
+}
+
+model Appointment {
+    id              String @id @default(uuid())
+    animal          Animal @relation(fields: [animal_id], references:[id])
+    animal_id       String
+    date            DateTime
+    type            String
+    is_canceld      Boolean @default(false)
+    created_at      DateTime @default(now())
+    updated_at      DateTime @default(now())
+}
+
