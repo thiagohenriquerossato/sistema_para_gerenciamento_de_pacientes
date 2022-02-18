@@ -39,34 +39,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetTutorByNameService = void 0;
-var prisma_1 = __importDefault(require("../../../prisma"));
-var GetTutorByNameService = /** @class */ (function () {
-    function GetTutorByNameService() {
-    }
-    GetTutorByNameService.prototype.execute = function (name) {
-        return __awaiter(this, void 0, void 0, function () {
-            var tutor;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, prisma_1.default.tutor.findMany({
-                            where: {
-                                name: {
-                                    contains: name,
-                                    mode: "insensitive",
-                                },
-                            },
-                            include: {
-                                animals: true,
-                            },
-                        })];
-                    case 1:
-                        tutor = _a.sent();
-                        return [2 /*return*/, tutor];
-                }
-            });
+exports.compressImg = void 0;
+var compressImage_1 = __importDefault(require("../config/compressImage"));
+function compressImg(request, response, next) {
+    return __awaiter(this, void 0, void 0, function () {
+        var file, path, newFileName;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    file = request.file;
+                    return [4 /*yield*/, compressImage_1.default.compressImage(file.path, 300)];
+                case 1:
+                    path = _a.sent();
+                    request.file.path = path;
+                    newFileName = request.file.filename.split(".")[0] + ".webp";
+                    request.file.filename = newFileName;
+                    return [2 /*return*/, next()];
+            }
         });
-    };
-    return GetTutorByNameService;
-}());
-exports.GetTutorByNameService = GetTutorByNameService;
+    });
+}
+exports.compressImg = compressImg;

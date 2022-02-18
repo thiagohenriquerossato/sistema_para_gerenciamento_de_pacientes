@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "postinstall": "npm run build"
   },
   "prisma": {
     "seed": "ts-node ./src/prisma/seed/seed.ts"
