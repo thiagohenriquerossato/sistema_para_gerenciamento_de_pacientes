@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 
 import uploadConfig from "../config/upload";
+import { compressImg } from "../middlewares/compressImg";
 import { CreateAnimalController } from "../modules/animals/controllers/CreateAnimalController";
 import { GetAnimalByIDController } from "../modules/animals/controllers/GetAnimalByIDController";
 import { ListAnimalsController } from "../modules/animals/controllers/ListAnimalsController";
@@ -20,6 +21,7 @@ animalsRoutes.get("/", new ListAnimalsController().handle);
 animalsRoutes.patch(
     "/avatar/:animal_id",
     uploadAvatar.single("avatar"),
+    compressImg,
     new UploadAnimalAvatarController().handle
 );
 
