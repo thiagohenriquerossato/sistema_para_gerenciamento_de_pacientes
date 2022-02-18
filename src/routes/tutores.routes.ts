@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 
 import uploadConfig from "../config/upload";
+import { compressImg } from "../middlewares/compressImg";
 import { CreateTutorController } from "../modules/tutores/controllers/CreateTutorController";
 import { GetTutorByIDController } from "../modules/tutores/controllers/GetTutorByIDController";
 import { GetTutorByNameController } from "../modules/tutores/controllers/GetTutorByNameController";
@@ -23,5 +24,6 @@ export { tutoresRoutes };
 tutoresRoutes.patch(
     "/avatar/:id",
     uploadAvatar.single("avatar"),
+    compressImg,
     new UploadTutorAvatarController().handle
 );

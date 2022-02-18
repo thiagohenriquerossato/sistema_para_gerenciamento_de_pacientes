@@ -15,9 +15,7 @@ class GetTutorByNameService {
                 animals: true,
             },
         });
-        if (tutor.length < 1) {
-            throw new Error("Tutor does not exists");
-        }
+
         return tutor;
     }
 }
