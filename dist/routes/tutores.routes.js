@@ -8,6 +8,7 @@ var express_1 = require("express");
 var multer_1 = __importDefault(require("multer"));
 var upload_1 = __importDefault(require("../config/upload"));
 var compressImg_1 = require("../middlewares/compressImg");
+var uploadCloudinary_1 = require("../middlewares/uploadCloudinary");
 var CreateTutorController_1 = require("../modules/tutores/controllers/CreateTutorController");
 var GetTutorByIDController_1 = require("../modules/tutores/controllers/GetTutorByIDController");
 var GetTutorByNameController_1 = require("../modules/tutores/controllers/GetTutorByNameController");
@@ -22,4 +23,10 @@ tutoresRoutes.put("/:tutor_id", new UpdateTutorController_1.UpdateTutorControlle
 tutoresRoutes.get("/", new ListTutoresController_1.ListTutoresController().handle);
 tutoresRoutes.get("/id/:id", new GetTutorByIDController_1.GetTutorByIDController().handle);
 tutoresRoutes.get("/name/:name", new GetTutorByNameController_1.GetTutorByNameController().handle);
-tutoresRoutes.patch("/avatar/:id", uploadAvatar.single("avatar"), compressImg_1.compressImg, new UploadTutorAvatarController_1.UploadTutorAvatarController().handle);
+// tutoresRoutes.patch(
+//     "/avatar/:id",
+//     uploadAvatar.single("avatar"),
+//     compressImg,
+//     new UploadTutorAvatarController().handle
+// );
+tutoresRoutes.patch("/avatar/:id", uploadAvatar.single("avatar"), compressImg_1.compressImg, uploadCloudinary_1.uploadCloudinary, new UploadTutorAvatarController_1.UploadTutorAvatarController().handle);

@@ -4,7 +4,7 @@ import { UploadTutorAvatarService } from "../services/UploadTutorAvatarService";
 
 class UploadTutorAvatarController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const avatar = request.file.filename;
+        const avatar = request.file.originalname;
         const { id } = request.params;
 
         const service = new UploadTutorAvatarService();

@@ -3,6 +3,7 @@ import multer from "multer";
 
 import uploadConfig from "../config/upload";
 import { compressImg } from "../middlewares/compressImg";
+import { uploadCloudinary } from "../middlewares/uploadCloudinary";
 import { CreateTutorController } from "../modules/tutores/controllers/CreateTutorController";
 import { GetTutorByIDController } from "../modules/tutores/controllers/GetTutorByIDController";
 import { GetTutorByNameController } from "../modules/tutores/controllers/GetTutorByNameController";
@@ -21,9 +22,16 @@ tutoresRoutes.get("/id/:id", new GetTutorByIDController().handle);
 tutoresRoutes.get("/name/:name", new GetTutorByNameController().handle);
 export { tutoresRoutes };
 
+// tutoresRoutes.patch(
+//     "/avatar/:id",
+//     uploadAvatar.single("avatar"),
+//     compressImg,
+//     new UploadTutorAvatarController().handle
+// );
 tutoresRoutes.patch(
     "/avatar/:id",
     uploadAvatar.single("avatar"),
     compressImg,
+    uploadCloudinary,
     new UploadTutorAvatarController().handle
 );
