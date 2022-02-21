@@ -10,7 +10,6 @@ export async function uploadCloudinary(
 ) {
     try {
         const { file } = request;
-        console.log(file);
 
         const uploadResponse: UploadApiResponse = await cloudinary.v2.uploader.upload(
             file.path,

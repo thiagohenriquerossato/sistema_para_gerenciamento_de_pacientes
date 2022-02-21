@@ -8,7 +8,6 @@ var sharp_1 = __importDefault(require("sharp"));
 exports.default = {
     compressImage: function (path, size) {
         var newPath = path.split(".")[0] + ".webp";
-        console.log(newPath);
         return sharp_1.default(path)
             .resize(size)
             .toFormat("webp")

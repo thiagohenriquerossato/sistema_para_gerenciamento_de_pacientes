@@ -49,7 +49,6 @@ function uploadCloudinary(request, response, nextFunction) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     file = request.file;
-                    console.log(file);
                     return [4 /*yield*/, cloudinary_1.default.v2.uploader.upload(file.path, {
                             upload_preset: "syspet_images_tutores",
                         })];

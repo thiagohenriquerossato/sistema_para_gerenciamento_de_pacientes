@@ -4,7 +4,6 @@ import sharp from "sharp";
 export default {
     compressImage(path: string, size: number): any {
         const newPath = `${path.split(".")[0]}.webp`;
-        console.log(newPath);
         return sharp(path)
             .resize(size)
             .toFormat("webp")
