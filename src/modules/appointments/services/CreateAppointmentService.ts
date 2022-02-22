@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 import { Appointment } from ".prisma/client";
 
 import prismaClient from "../../../prisma";
@@ -21,7 +23,7 @@ class CreateAppointmentService {
         try {
             const appointment = await prismaClient.appointment.create({
                 data: {
-                    date,
+                    date: dayjs(date).toDate(),
                     type,
                     animal_id,
                 },

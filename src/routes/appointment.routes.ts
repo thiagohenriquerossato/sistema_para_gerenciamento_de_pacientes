@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { CreateAppointmentController } from "../modules/appontiments/controllers/CreateAppointmentController";
-import { ListAppointmentsController } from "../modules/appontiments/controllers/ListAppointmentsController";
+import { CreateAppointmentController } from "../modules/appointments/controllers/CreateAppointmentsController";
+import { ListAppointmentsController } from "../modules/appointments/controllers/ListAppointmentsController";
 
 const appointmentRoutes = Router();
 
