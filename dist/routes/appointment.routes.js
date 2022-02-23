@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.appointmentRoutes = void 0;
 var express_1 = require("express");
+var CancelAppointmentController_1 = require("../modules/appointments/controllers/CancelAppointmentController");
 var CreateAppointmentsController_1 = require("../modules/appointments/controllers/CreateAppointmentsController");
 var ListAppointmentsController_1 = require("../modules/appointments/controllers/ListAppointmentsController");
 var appointmentRoutes = express_1.Router();
 exports.appointmentRoutes = appointmentRoutes;
 appointmentRoutes.post("/:animal_id", new CreateAppointmentsController_1.CreateAppointmentController().handle);
+appointmentRoutes.post("/cancel/:id", new CancelAppointmentController_1.CancelAppointmentController().handle);
 appointmentRoutes.get("/", new ListAppointmentsController_1.ListAppointmentsController().handle);
