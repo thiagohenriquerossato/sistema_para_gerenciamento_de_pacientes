@@ -15,17 +15,13 @@ class UploadTutorAvatarService {
             if (hasAvatar.avatar) {
                 await deleFile(`./public/images/tutores/${hasAvatar.avatar}`);
 
-                if (hasAvatar.avatar.includes("/")) {
-                    const [, file] = hasAvatar.avatar.split("tutores/");
-                    const public_id = `syspet/images/tutores/${
-                        file.split(".")[0]
-                    }`;
+                const [, file] = hasAvatar.avatar.split("tutores/");
+                const public_id = `syspet/images/tutores/${file.split(".")[0]}`;
 
-                    try {
-                        await cloudinary.v2.uploader.destroy(public_id);
-                    } catch (error) {
-                        console.log("Error deleting old image");
-                    }
+                try {
+                    await cloudinary.v2.uploader.destroy(public_id);
+                } catch (error) {
+                    console.log("Error deleting old image");
                 }
             }
             const tutor = await prismaClient.tutor.update({
