@@ -64,7 +64,7 @@ var UploadAnimalAvatarService = /** @class */ (function () {
                         return [4 /*yield*/, file_1.deleFile("./public/images/animal/" + hasAvatar.avatar)];
                     case 2:
                         _b.sent();
-                        _a = hasAvatar.avatar.split("tutores/"), file = _a[1];
+                        _a = hasAvatar.avatar.split("pets/"), file = _a[1];
                         public_id = "syspet/images/pets/" + file.split(".")[0];
                         _b.label = 3;
                     case 3:
