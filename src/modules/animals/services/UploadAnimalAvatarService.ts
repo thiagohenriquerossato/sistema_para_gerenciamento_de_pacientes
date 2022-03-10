@@ -14,7 +14,7 @@ class UploadAnimalAvatarService {
             });
             if (hasAvatar.avatar) {
                 await deleFile(`./public/images/animal/${hasAvatar.avatar}`);
-                const [, file] = hasAvatar.avatar.split("tutores/");
+                const [, file] = hasAvatar.avatar.split("pets/");
                 const public_id = `syspet/images/pets/${file.split(".")[0]}`;
                 try {
                     await cloudinary.v2.uploader.destroy(public_id);
