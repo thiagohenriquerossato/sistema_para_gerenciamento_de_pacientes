@@ -8,6 +8,7 @@ var express_1 = require("express");
 var multer_1 = __importDefault(require("multer"));
 var upload_1 = __importDefault(require("../config/upload"));
 var compressImg_1 = require("../middlewares/compressImg");
+var uploadCloudinary_1 = require("../middlewares/uploadCloudinary");
 var CreateAnimalController_1 = require("../modules/animals/controllers/CreateAnimalController");
 var GetAnimalByIDController_1 = require("../modules/animals/controllers/GetAnimalByIDController");
 var ListAnimalsController_1 = require("../modules/animals/controllers/ListAnimalsController");
@@ -20,4 +21,4 @@ animalsRoutes.post("/:id", new CreateAnimalController_1.CreateAnimalController()
 animalsRoutes.put("/:id", new UpdateAnimalController_1.UpdateAnimalController().handle);
 animalsRoutes.get("/id/:id", new GetAnimalByIDController_1.GetAnimalByIDController().handle);
 animalsRoutes.get("/", new ListAnimalsController_1.ListAnimalsController().handle);
-animalsRoutes.patch("/avatar/:animal_id", uploadAvatar.single("avatar"), compressImg_1.compressImg, new UploadAnimalAvatarController_1.UploadAnimalAvatarController().handle);
+animalsRoutes.patch("/avatar/:animal_id", uploadAvatar.single("avatar"), compressImg_1.compressImg, uploadCloudinary_1.uploadCloudinary, new UploadAnimalAvatarController_1.UploadAnimalAvatarController().handle);

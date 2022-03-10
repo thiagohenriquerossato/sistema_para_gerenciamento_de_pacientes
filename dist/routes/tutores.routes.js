@@ -23,10 +23,8 @@ tutoresRoutes.put("/:tutor_id", new UpdateTutorController_1.UpdateTutorControlle
 tutoresRoutes.get("/", new ListTutoresController_1.ListTutoresController().handle);
 tutoresRoutes.get("/id/:id", new GetTutorByIDController_1.GetTutorByIDController().handle);
 tutoresRoutes.get("/name/:name", new GetTutorByNameController_1.GetTutorByNameController().handle);
-// tutoresRoutes.patch(
-//     "/avatar/:id",
-//     uploadAvatar.single("avatar"),
-//     compressImg,
-//     new UploadTutorAvatarController().handle
-// );
+tutoresRoutes.get("/teste", function (req, res) {
+    console.log(process.env.CLOUDINARY_API_KEY);
+    return res.send();
+});
 tutoresRoutes.patch("/avatar/:id", uploadAvatar.single("avatar"), compressImg_1.compressImg, uploadCloudinary_1.uploadCloudinary, new UploadTutorAvatarController_1.UploadTutorAvatarController().handle);

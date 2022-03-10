@@ -41,30 +41,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UploadTutorAvatarService = void 0;
 var prisma_1 = __importDefault(require("../../../prisma"));
+var cloudinary_1 = __importDefault(require("../../../utils/cloudinary"));
 var file_1 = require("../../../utils/file");
 var UploadTutorAvatarService = /** @class */ (function () {
     function UploadTutorAvatarService() {
     }
     UploadTutorAvatarService.prototype.execute = function (avatar, id) {
         return __awaiter(this, void 0, void 0, function () {
-            var hasAvatar, tutor, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var hasAvatar, _a, file, public_id, error_1, tutor, error_2;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _a.trys.push([0, 5, , 6]);
+                        _b.trys.push([0, 8, , 9]);
                         return [4 /*yield*/, prisma_1.default.tutor.findUnique({
                                 where: {
                                     id: id,
                                 },
                             })];
                     case 1:
-                        hasAvatar = _a.sent();
-                        if (!hasAvatar) return [3 /*break*/, 3];
+                        hasAvatar = _b.sent();
+                        if (!hasAvatar.avatar) return [3 /*break*/, 6];
                         return [4 /*yield*/, file_1.deleFile("./public/images/tutores/" + hasAvatar.avatar)];
                     case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [4 /*yield*/, prisma_1.default.tutor.update({
+                        _b.sent();
+                        _a = hasAvatar.avatar.split("tutores/"), file = _a[1];
+                        public_id = "syspet/images/tutores/" + file.split(".")[0];
+                        _b.label = 3;
+                    case 3:
+                        _b.trys.push([3, 5, , 6]);
+                        return [4 /*yield*/, cloudinary_1.default.v2.uploader.destroy(public_id)];
+                    case 4:
+                        _b.sent();
+                        return [3 /*break*/, 6];
+                    case 5:
+                        error_1 = _b.sent();
+                        console.log("Error deleting old image");
+                        return [3 /*break*/, 6];
+                    case 6: return [4 /*yield*/, prisma_1.default.tutor.update({
                             where: {
                                 id: id,
                             },
@@ -73,13 +86,13 @@ var UploadTutorAvatarService = /** @class */ (function () {
                                 updated_at: new Date(),
                             },
                         })];
-                    case 4:
-                        tutor = _a.sent();
+                    case 7:
+                        tutor = _b.sent();
                         return [2 /*return*/, tutor];
-                    case 5:
-                        error_1 = _a.sent();
+                    case 8:
+                        error_2 = _b.sent();
                         throw new Error("Tutor does not exists");
-                    case 6: return [2 /*return*/];
+                    case 9: return [2 /*return*/];
                 }
             });
         });

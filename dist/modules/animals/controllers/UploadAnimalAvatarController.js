@@ -47,7 +47,7 @@ var UploadAnimalAvatarController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        avatar = request.file.filename;
+                        avatar = request.file.originalname;
                         animal_id = request.params.animal_id;
                         service = new UploadAnimalAvatarService_1.UploadAnimalAvatarService();
                         _a.label = 1;

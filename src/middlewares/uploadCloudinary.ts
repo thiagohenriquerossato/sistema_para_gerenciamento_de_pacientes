@@ -10,16 +10,22 @@ export async function uploadCloudinary(
 ) {
     try {
         const { file } = request;
+        const origin = request.originalUrl;
+
+        let upload_preset: string;
+
+        if (origin.includes("tutor")) upload_preset = "syspet_images_tutores";
+        if (origin.includes("animal")) upload_preset = "syspet_images_pets";
 
         const uploadResponse: UploadApiResponse = await cloudinary.v2.uploader.upload(
             file.path,
             {
-                upload_preset: "syspet_images_tutores",
+                upload_preset,
             }
         );
         request.file.originalname = uploadResponse.url;
     } catch (err) {
-        console.log(err);
+        response.status(400).send(err);
     }
 
     return nextFunction();

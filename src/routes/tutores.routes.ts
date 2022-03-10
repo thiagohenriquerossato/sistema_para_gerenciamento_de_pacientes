@@ -22,12 +22,11 @@ tutoresRoutes.get("/id/:id", new GetTutorByIDController().handle);
 tutoresRoutes.get("/name/:name", new GetTutorByNameController().handle);
 export { tutoresRoutes };
 
-// tutoresRoutes.patch(
-//     "/avatar/:id",
-//     uploadAvatar.single("avatar"),
-//     compressImg,
-//     new UploadTutorAvatarController().handle
-// );
+tutoresRoutes.get("/teste", (req, res) => {
+    console.log(process.env.CLOUDINARY_API_KEY);
+    return res.send();
+});
+
 tutoresRoutes.patch(
     "/avatar/:id",
     uploadAvatar.single("avatar"),
